@@ -1,0 +1,85 @@
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.madhub.socialmediaautomatio">
+
+    <!-- 
+        Technical Architecture Overview:
+        This Manifest file outlines the necessary configurations for the Social Media Automation Tool.
+        It includes essential permissions, component registrations, and metadata required for the application
+        to function effectively in automating social media tasks across multiple platforms. 
+    -->
+
+    <!-- Required to allow internet access for social media operations -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 
+        Technical Detail: 
+        The INTERNET permission enables continuous network communication, necessary for interacting with 
+        social media APIs and performing automation tasks. 
+    -->
+
+    <!-- 
+        Required to read/write data to external storage for saving logs or configuration files.
+    -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 
+        Implementation Detail: 
+        These permissions facilitate the application's ability to manage media files and logs, ensuring 
+        smooth operation and user-configured content management. 
+    -->
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        
+        <!-- 
+            Main Activity Configuration:
+            This activity serves as the entry point for the application, providing users with access to 
+            the automation functionalities.
+        -->
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 
+            AutomationService Registration:
+            This service runs in the background 24/7, executing scheduled social media automation tasks 
+            seamlessly without user intervention.
+        -->
+        <service android:name=".AutomationService"
+                 android:exported="false">
+            <!-- 
+                Best Practice:
+                The service is marked as non-exported to prevent external applications from starting it, 
+                maintaining the integrity and security of the automation processes.
+            -->
+        </service>
+
+        <!-- 
+            Metadata Configuration:
+            This is used to provide additional settings or configurations that the application may require 
+            during runtime or installation.
+        -->
+        <meta-data
+            android:name="com.madhub.socialmediaautomatio.META_DATA"
+            android:value="Automation Tool for Social Media Management" />
+    </application>
+</manifest>
+```
+
+### Key Components Explained:
+
+- **Permissions**: The declaration of `INTERNET`, `WRITE_EXTERNAL_STORAGE`, and `READ_EXTERNAL_STORAGE` permissions is essential for enabling network capabilities and managing file storage, which are critical for the functionality of MadHub in automating social media tasks.
+  
+- **Component Registration**: The `MainActivity` serves as the user interface entry point, while the `AutomationService` is vital for background operations, ensuring that automation tasks run continuously, embodying best practices in Android service management.
+
+- **Best Practices**: The implementation of security measures, such as non-exporting the service, is crucial to safeguard the application's automation processes, thus enhancing overall application security and stability.
